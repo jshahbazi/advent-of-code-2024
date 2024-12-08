@@ -6,7 +6,7 @@ fn evaluate_left_to_right(
     numbers: &[i64],
     current_value: i64,
     idx: usize,
-    operators: &[char],
+    operators: &[&str],
     results: &mut Vec<i64>,
 ) {
     if idx == numbers.len() {
@@ -16,8 +16,9 @@ fn evaluate_left_to_right(
 
     for &op in operators {
         let next_value = match op {
-            '+' => current_value + numbers[idx],
-            '*' => current_value * numbers[idx],
+            "+" => current_value + numbers[idx],
+            "*" => current_value * numbers[idx],
+            "||" => (current_value.to_string() + &numbers[idx].to_string()).parse::<i64>().unwrap(),
             _ => unreachable!(),
         };
         evaluate_left_to_right(numbers, next_value, idx + 1, operators, results);
@@ -25,7 +26,7 @@ fn evaluate_left_to_right(
 }
  
 fn part(first: &i64, numbers: Vec<i64>) -> i64 {
-    let operators = vec!['+', '*'];
+    let operators = vec!["+", "*", "||"];
     let mut results = Vec::new();
 
     evaluate_left_to_right(&numbers[1..], numbers[0], 0, &operators, &mut results);
