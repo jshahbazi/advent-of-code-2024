@@ -25,7 +25,20 @@ fn evaluate_left_to_right(
     }
 }
  
-fn part(first: &i64, numbers: Vec<i64>) -> i64 {
+fn part1(first: &i64, numbers: Vec<i64>) -> i64 {
+    let operators = vec!["+", "*"];
+    let mut results = Vec::new();
+
+    evaluate_left_to_right(&numbers[1..], numbers[0], 0, &operators, &mut results);
+
+    if results.contains(first) {
+        *first
+    } else {
+        0
+    }
+}
+
+fn part2(first: &i64, numbers: Vec<i64>) -> i64 {
     let operators = vec!["+", "*", "||"];
     let mut results = Vec::new();
 
@@ -45,6 +58,7 @@ fn main() -> io::Result<()> {
     let line_pattern = Regex::new(r"^(?P<first>\d+):(?P<rest>(?:\s\d+)+)$").unwrap();
 
     let mut sum = 0;
+    let mut sum_part2 = 0;
 
     for line in reader.lines() {
         let line = line?;
@@ -58,12 +72,14 @@ fn main() -> io::Result<()> {
                 numbers = rest.as_str().split_whitespace().map(|s| s.parse::<i64>().unwrap_or(0)).collect();
             }
 
-            sum += part(&first, numbers);
+            sum += part1(&first, numbers.clone());
+            sum_part2 += part2(&first, numbers.clone());
         }      
     }
 
 
     println!("Sum: {}", sum);
+    println!("sum_part2: {}", sum_part2);
 
     Ok(())
 }
