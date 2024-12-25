@@ -93,21 +93,5 @@ fn main() -> io::Result<()> {
     println!("{}", result);
 
 
-    // println!("{:?}", locks);
-        // for caps in gate_pattern.captures_iter(&line) {
-        //     let first_wire = caps.name("first_wire").unwrap().as_str().to_string();
-        //     let operation = caps.name("operation").unwrap().as_str().to_string();
-        //     let second_wire = caps.name("second_wire").unwrap().as_str().to_string();
-        //     let output_wire = caps.name("output_wire").unwrap().as_str().to_string();            
-        //     // println!("{:?} {:?} {:?} -> {:?}", first_wire, operation, second_wire, output_wire);
-        //     // calculate_operation(&wiring_values, first_wire, operation, second_wire);
-        //     wiring_queue.push_back((first_wire.clone(), operation.clone(), second_wire.clone(), output_wire.clone()));
-        // }
-    // }
-
-    // let result_part1 = part1(wiring_values, wiring_queue);
-
-
-
     Ok(())
 }
