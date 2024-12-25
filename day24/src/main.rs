@@ -4,15 +4,15 @@ use std::collections::{HashMap, VecDeque};
 use regex::Regex;
 
 
-fn calculate_operation(wiring_values: &HashMap<String, usize>, first_wire: &str, operation: &str, second_wire: &str) -> usize {
-    if let Some(&value) = wiring_values.get(first_wire) {
-        println!("Value for {}: {}", first_wire, value);
-    } else {
-        println!("Key not found! {:?}", first_wire);
-    }
+// fn calculate_operation(wiring_values: &HashMap<String, usize>, first_wire: &str, operation: &str, second_wire: &str) -> usize {
+//     if let Some(&value) = wiring_values.get(first_wire) {
+//         println!("Value for {}: {}", first_wire, value);
+//     } else {
+//         println!("Key not found! {:?}", first_wire);
+//     }
 
-    0
-}
+//     0
+// }
 
 
 fn part1(mut wiring_values: HashMap<String, usize>, mut wiring_queue: VecDeque<(String, String, String, String)>) -> i32 {
@@ -47,7 +47,6 @@ fn part1(mut wiring_values: HashMap<String, usize>, mut wiring_queue: VecDeque<(
         .filter(|(key, _)| key.starts_with('z'))
         .collect();
 
-    // Sort by the keys, interpreting the numeric part as an integer
     filtered_and_sorted.sort_by_key(|(key, _)| key[1..].parse::<usize>().unwrap());
 
     for (key, value) in &filtered_and_sorted {
@@ -57,7 +56,7 @@ fn part1(mut wiring_values: HashMap<String, usize>, mut wiring_queue: VecDeque<(
     filtered_and_sorted.reverse();
     let binary_number: String = filtered_and_sorted
     .iter()
-    .map(|(_, &value)| value.to_string()) // Convert each value to a string
+    .map(|(_, &value)| value.to_string())
     .collect();
 
     println!("Binary number: {}", binary_number);
